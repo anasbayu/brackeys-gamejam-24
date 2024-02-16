@@ -29,6 +29,8 @@ public class Event{
     }
 
     void PlayEvent(){
+        isRunning = true;
+        
         if(type == "Knock"){
             mLinker.mUIManager.ShowDialogue(true, mPeople.Knocking());
         }else{

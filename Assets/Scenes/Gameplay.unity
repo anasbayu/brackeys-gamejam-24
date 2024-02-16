@@ -1172,7 +1172,6 @@ MonoBehaviour:
   - {fileID: 1595993281}
   timeBetweenNextEvent: 0
   lastEventTime: 0
-  isEventRunning: 0
 --- !u!1 &224661308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1681,11 @@ MonoBehaviour:
   - ...
   orderCallMessage:
   - ...
+  doorOpenedMessage:
+  - Finally! Here is your package.
+  msgWindowPeek: a pizza box is spotted!
+  isLetInside: 0
+  isHavingVehicle: 1
 --- !u!4 &308978056
 Transform:
   m_ObjectHideFlags: 0
@@ -2486,7 +2490,7 @@ SpriteRenderer:
   m_SortingLayerID: -1360815611
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 450e228f16be63146a38217658fa0339, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2505,8 +2509,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376066643}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.2808, y: -1.405, z: 0}
-  m_LocalScale: {x: 0.62321854, y: 1.2185957, z: 0.24886708}
+  m_LocalPosition: {x: 9.4152, y: -1.42, z: 0}
+  m_LocalScale: {x: 0.18221657, y: 0.26065764, z: 0.05323267}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 884626725}
@@ -2576,14 +2580,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.45}
+  m_Size: {x: 2.31, y: 6.15}
   m_EdgeRadius: 0
 --- !u!114 &376066648
 MonoBehaviour:
@@ -2612,6 +2616,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mLinker: {fileID: 511037138}
+  mOpenedDoorSprite: {fileID: 21300000, guid: 9929b7c61f9326c469878b974337c21a, type: 3}
+  mClosedDoorSprite: {fileID: 21300000, guid: 450e228f16be63146a38217658fa0339, type: 3}
+  isDoorOpen: 0
   responseTextGeneral:
   - Mom said to not open the door until she returned.
   - I have to keep it locked.
@@ -3549,7 +3556,7 @@ GameObject:
   - component: {fileID: 532214587}
   - component: {fileID: 532214588}
   m_Layer: 0
-  m_Name: Neighbour
+  m_Name: Neighbor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3598,6 +3605,11 @@ MonoBehaviour:
   - ...
   orderCallMessage:
   - ...
+  doorOpenedMessage:
+  - Oh there you are! Here is the mochi. Your Mom asked for it.
+  msgWindowPeek: just my neighborhood.
+  isLetInside: 0
+  isHavingVehicle: 0
 --- !u!1 &538561417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4106,6 +4118,11 @@ MonoBehaviour:
   - ...
   orderCallMessage:
   - I ordered a Pizza for you.  Make sure to let the Pizza Guy in.
+  doorOpenedMessage:
+  - Now Die!!! hahahahaah.
+  msgWindowPeek: 
+  isLetInside: 0
+  isHavingVehicle: 0
 --- !u!1 &661410839
 GameObject:
   m_ObjectHideFlags: 0
@@ -4985,6 +5002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8845b8c4008a43963a5a22d7b16e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mLinker: {fileID: 511037138}
   isShutterOpen: 0
   mShutter: {fileID: 748934201}
   mWindowLight: {fileID: 988812450}
@@ -5847,7 +5865,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensityEnabled: 1
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -6303,6 +6321,11 @@ MonoBehaviour:
   - This is Mom, I hear there is a strange man wandering around town. Be carefull.
   orderCallMessage:
   - I ordered a Pizza for you.  Make sure to let the Pizza Guy in.
+  doorOpenedMessage:
+  - Home sweet home!
+  msgWindowPeek: 
+  isLetInside: 0
+  isHavingVehicle: 0
 --- !u!1 &1077832518
 GameObject:
   m_ObjectHideFlags: 0
@@ -7699,7 +7722,7 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensityEnabled: 1
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
@@ -8487,7 +8510,7 @@ GameObject:
   - component: {fileID: 1595993282}
   - component: {fileID: 1595993281}
   m_Layer: 0
-  m_Name: Friend
+  m_Name: Plumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8510,11 +8533,11 @@ MonoBehaviour:
   timeWillingToWait: 15
   timeBeforeAngry: 5
   openingDialogues:
-  - Delivery~
-  - Hello, there is a package.
+  - Hello this is the Plumbing Brothers company.
+  - I heard you have a pipe problem?
   waitingDialogues:
   - Hello?
-  - I've got another delivery!
+  - come on, no time to waste.
   - knock knock.
   endingDialogues:
   - Ugh, I have no time for this.
@@ -8525,6 +8548,11 @@ MonoBehaviour:
   - ...
   orderCallMessage:
   - ...
+  doorOpenedMessage:
+  - Where is the leakage!?
+  msgWindowPeek: There is a plumbing van.
+  isLetInside: 0
+  isHavingVehicle: 1
 --- !u!4 &1595993282
 Transform:
   m_ObjectHideFlags: 0

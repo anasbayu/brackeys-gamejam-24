@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Window : MonoBehaviour
 {
+    public Linker mLinker;
     public bool isShutterOpen;
     public GameObject mShutter;
     public GameObject mWindowLight;
@@ -27,7 +28,13 @@ public class Window : MonoBehaviour
         int responseIndex = Random.Range(0, peekResponseTextGeneral.Count);
 
         if(isShutterOpen){
-            return peekResponseTextGeneral[responseIndex];
+            // Check if an event is running currently.
+            if(mLinker.mEventManager.IsThereAnEvent()){
+                return mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople().GetWindowPeekMsg();
+            }else{
+                // Random peek response.
+                return peekResponseTextGeneral[responseIndex];
+            }
         }else{
             return "I can't see with the shutter closed.";
         }

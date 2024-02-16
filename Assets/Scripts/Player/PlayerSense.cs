@@ -17,7 +17,7 @@ public class PlayerSense : MonoBehaviour{
         mLinker.mStatusBalloon.SetActive(false);
     }
 
-    void OnTriggerStay2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Interactable"){
             isInteracting = true;
             currActionIndex = 0;
@@ -84,13 +84,13 @@ public class PlayerSense : MonoBehaviour{
         }else if(triggerName == "Door"){
             if(actionList[currActionIndex] == "Open Door"){
                 // Check if there is an event going on.
-                // Animate open door.
+                mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.OpenDialogue(mLinker.mEventManager.IsThereAnEvent()));
             }else if(actionList[currActionIndex] == "Talk"){
                 // Talk.
 
             }else{
                 // show what the Player think. (Hand)
-                mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.Open());
+                mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.InnerThought());
             }
         }else if(triggerName == "Fridge"){
             mLinker.mUIManager.ShowDialogue(true, "checking the fridge...");

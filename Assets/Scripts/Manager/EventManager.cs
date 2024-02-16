@@ -8,21 +8,19 @@ public class EventManager : MonoBehaviour
     public List<People> mPeoples = new List<People>();
     
     // Change this to set how long to give the Player idle time before the first event.
-    int timeBeforeFirstEvent = 15;
+    int timeBeforeFirstEvent = 30;
 
     // Define the interval between time. It's going to be random(min, max).
-    int minTimeBetweenEvent = 5;
-    int maxTimeBetweenEvent = 10;
+    int minTimeBetweenEvent = 20;
+    int maxTimeBetweenEvent = 30;
     public int timeBetweenNextEvent;
 
     public int lastEventTime;  // Save the time of the last event occured,
     int eventCount;     // Save the total event count.
-    public bool isEventRunning;     // true if there is an event going on.
     Event CurrEvent;
 
     void Start(){
         eventCount = 0;
-        isEventRunning = false;
         lastEventTime = mLinker.mTimeManager.GetCurrTime();
         timeBetweenNextEvent = Random.Range(minTimeBetweenEvent, maxTimeBetweenEvent);
     }
@@ -37,28 +35,29 @@ public class EventManager : MonoBehaviour
         }
 
         // Start random event when it is not the first event & there is no event currently running.
-        if(!isEventRunning && eventCount != 0){
+        if(!IsThereAnEvent() && eventCount != 0){
             if(mLinker.mTimeManager.GetCurrTime() == lastEventTime + timeBetweenNextEvent){
                 StartEvent("Random");
             }
         }
 
         // If there is a People event currently running, check their status.
-        if(isEventRunning && CurrEvent != null){
-            // If he get angry.
-            if(mLinker.mTimeManager.GetCurrTime() == lastEventTime + CurrEvent.GetAssociatedPeople().timeBeforeAngry){
-                mLinker.mUIManager.ShowDialogue(true, CurrEvent.GetAssociatedPeople().Angry());
-            }
+        if(CurrEvent != null){
+            if(CurrEvent.GetEventType() == "Knock"){
+                // If he get angry.
+                if(mLinker.mTimeManager.GetCurrTime() == lastEventTime + CurrEvent.GetAssociatedPeople().timeBeforeAngry){
+                    mLinker.mUIManager.ShowDialogue(true, CurrEvent.GetAssociatedPeople().Angry());
+                }
 
-            if(mLinker.mTimeManager.GetCurrTime() == lastEventTime + CurrEvent.GetAssociatedPeople().timeWillingToWait){
-                mLinker.mUIManager.ShowDialogue(true, CurrEvent.GetAssociatedPeople().Left());
-                StopEvent();
-            }
-        } 
+                if(mLinker.mTimeManager.GetCurrTime() == lastEventTime + CurrEvent.GetAssociatedPeople().timeWillingToWait){
+                    mLinker.mUIManager.ShowDialogue(true, CurrEvent.GetAssociatedPeople().Left());
+                    StopEvent();
+                }
+            } 
+        }
     }
 
     void StartEvent(string eventName){
-        isEventRunning = true;
         eventCount++;
 
         // Randomize the event, if not predetermined.
@@ -78,11 +77,22 @@ public class EventManager : MonoBehaviour
     }
 
     public void StopEvent(){
-        isEventRunning = false;
         lastEventTime = mLinker.mTimeManager.GetCurrTime();
 
         // calculate the next event time.
         timeBetweenNextEvent = Random.Range(minTimeBetweenEvent, maxTimeBetweenEvent);
         CurrEvent = null;
+    }
+
+    public bool IsThereAnEvent(){
+        if(CurrEvent != null){
+            return true; 
+        }else{
+            return false;
+        }
+    }
+
+    public Event GetCurrEvent(){
+        return CurrEvent;
     }
 }

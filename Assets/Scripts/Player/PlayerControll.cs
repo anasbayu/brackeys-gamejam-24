@@ -16,15 +16,6 @@ public class PlayerControll : MonoBehaviour{
     }
 
     void Update(){
-        // DEBUG PURPOSE ONLY.
-        if(Input.GetKey(KeyCode.G)){
-            mLinker.mSoundManager.PlayKnock();
-        }
-        if(Input.GetKey(KeyCode.H)){
-            mLinker.mSoundManager.PlayRingtone();
-        }
-
-
         if(!mLinker.mUIManager.isDialogueShowing && !mLinker.mUIManager.isQuestShowing 
             && !mLinker.mGameManager.isPaused){
             // Move right.
@@ -80,6 +71,25 @@ public class PlayerControll : MonoBehaviour{
                 mLinker.mPhone.PhoneConversation();
             }else{
                 mLinker.mUIManager.ShowDialogue(false, "");
+
+                // If the door is open & there is no event, close it.
+                if(mLinker.mDoor.isDoorOpen && !mLinker.mEventManager.IsThereAnEvent()){
+                    mLinker.mDoor.Close();
+                // If the door is open & there is event going on, reply.
+                }else if(mLinker.mDoor.isDoorOpen && mLinker.mEventManager.IsThereAnEvent()){
+                    // When there is an event, set the reply IF the Person is not let in yet.
+                    if(mLinker.mEventManager.GetCurrEvent().
+                        GetAssociatedPeople().isLetInside){
+                        
+                        // do something.
+                        mLinker.mDoor.Close();
+                        mLinker.mEventManager.StopEvent();
+                    }else{
+                        string textToDisplay = mLinker.mEventManager.GetCurrEvent().
+                        GetAssociatedPeople().LettingInsideHouse();
+                        mLinker.mUIManager.ShowDialogue(true, textToDisplay);
+                    }                
+                }
             }
         }
 
