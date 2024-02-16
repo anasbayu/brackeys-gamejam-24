@@ -89,6 +89,10 @@ public class PlayerControll : MonoBehaviour{
                         GetAssociatedPeople().LettingInsideHouse();
                         mLinker.mUIManager.ShowDialogue(true, textToDisplay);
                     }                
+                }else if(mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople().isHavingConversation){
+                    string textToDisplay = mLinker.mEventManager.GetCurrEvent().
+                        GetAssociatedPeople().GetConversationMsg();
+                        mLinker.mUIManager.ShowDialogue(true, textToDisplay);
                 }
             }
         }

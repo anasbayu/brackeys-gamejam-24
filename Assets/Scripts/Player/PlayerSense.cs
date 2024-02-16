@@ -86,8 +86,14 @@ public class PlayerSense : MonoBehaviour{
                 // Check if there is an event going on.
                 mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.OpenDialogue(mLinker.mEventManager.IsThereAnEvent()));
             }else if(actionList[currActionIndex] == "Talk"){
-                // Talk.
-
+                // Check if there is event running.
+                if(mLinker.mEventManager.IsThereAnEvent()){
+                    // Talk to the person behind the door.
+                    mLinker.mUIManager.ShowDialogue(true, "Who's there?.");
+                    mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople().StartConversation();
+                }else{
+                    mLinker.mUIManager.ShowDialogue(true, "There is no one behind the door.");
+                }
             }else{
                 // show what the Player think. (Hand)
                 mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.InnerThought());

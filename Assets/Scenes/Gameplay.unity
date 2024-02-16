@@ -1663,8 +1663,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Joko
   type: Delivery Guy
-  timeWillingToWait: 15
-  timeBeforeAngry: 5
+  timeWillingToWait: 20
+  timeBeforeAngry: 10
   openingDialogues:
   - Delivery~
   - Hello, there is a package.
@@ -1683,9 +1683,11 @@ MonoBehaviour:
   - ...
   doorOpenedMessage:
   - Finally! Here is your package.
-  msgWindowPeek: a pizza box is spotted!
+  msgWindowPeek: 
+  msgConversation: Who am I? I am not a suspicious person.
   isLetInside: 0
   isHavingVehicle: 1
+  isHavingConversation: 0
 --- !u!4 &308978056
 Transform:
   m_ObjectHideFlags: 0
@@ -3594,7 +3596,7 @@ MonoBehaviour:
   timeWillingToWait: 25
   timeBeforeAngry: 20
   openingDialogues:
-  - Hey it is your neighbour.
+  - Hey it is your neighbor.
   waitingDialogues:
   - Anybody home?
   endingDialogues:
@@ -3608,8 +3610,10 @@ MonoBehaviour:
   doorOpenedMessage:
   - Oh there you are! Here is the mochi. Your Mom asked for it.
   msgWindowPeek: just my neighborhood.
+  msgConversation: This is Anne, I bring the Mochi.
   isLetInside: 0
   isHavingVehicle: 0
+  isHavingConversation: 0
 --- !u!1 &538561417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4121,8 +4125,10 @@ MonoBehaviour:
   doorOpenedMessage:
   - Now Die!!! hahahahaah.
   msgWindowPeek: 
+  msgConversation: 
   isLetInside: 0
   isHavingVehicle: 0
+  isHavingConversation: 0
 --- !u!1 &661410839
 GameObject:
   m_ObjectHideFlags: 0
@@ -6324,8 +6330,10 @@ MonoBehaviour:
   doorOpenedMessage:
   - Home sweet home!
   msgWindowPeek: 
+  msgConversation: 
   isLetInside: 0
   isHavingVehicle: 0
+  isHavingConversation: 0
 --- !u!1 &1077832518
 GameObject:
   m_ObjectHideFlags: 0
@@ -8530,8 +8538,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tim
   type: Friend
-  timeWillingToWait: 15
-  timeBeforeAngry: 5
+  timeWillingToWait: 20
+  timeBeforeAngry: 10
   openingDialogues:
   - Hello this is the Plumbing Brothers company.
   - I heard you have a pipe problem?
@@ -8550,9 +8558,11 @@ MonoBehaviour:
   - ...
   doorOpenedMessage:
   - Where is the leakage!?
-  msgWindowPeek: There is a plumbing van.
+  msgWindowPeek: There is a big truck in the front yard.
+  msgConversation: Who's asking?
   isLetInside: 0
   isHavingVehicle: 1
+  isHavingConversation: 0
 --- !u!4 &1595993282
 Transform:
   m_ObjectHideFlags: 0

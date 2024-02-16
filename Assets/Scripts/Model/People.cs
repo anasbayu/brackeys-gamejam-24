@@ -24,10 +24,11 @@ public class People : MonoBehaviour{
     public List<string> doorOpenedMessage = new List<string>();
 
     string msgOpening, msgAngry, msgEnding, msgGeneralCall, msgInfoCall, msgOrderCall, msgDoorOpened;
-    public string msgWindowPeek;
+    public string msgWindowPeek, msgConversation;
 
     public bool isLetInside;
     public bool isHavingVehicle;
+    public bool isHavingConversation;
 
     public void SetPeople(){
         isLetInside = false;
@@ -83,5 +84,14 @@ public class People : MonoBehaviour{
 
     public string GetWindowPeekMsg(){
         return msgWindowPeek;
+    }
+
+    public void StartConversation(){
+        isHavingConversation = true;
+    }
+
+    public string GetConversationMsg(){
+        isHavingConversation = false;
+        return msgConversation;
     }
 }
