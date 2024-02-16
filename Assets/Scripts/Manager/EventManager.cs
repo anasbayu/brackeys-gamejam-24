@@ -16,10 +16,12 @@ public class EventManager : MonoBehaviour
     public int timeBetweenNextEvent;
 
     public int lastEventTime;  // Save the time of the last event occured,
+    string lastEventType;
     int eventCount;     // Save the total event count.
     Event CurrEvent;
 
     void Start(){
+        lastEventType = null;
         eventCount = 0;
         lastEventTime = mLinker.mTimeManager.GetCurrTime();
         timeBetweenNextEvent = Random.Range(minTimeBetweenEvent, maxTimeBetweenEvent);
@@ -57,17 +59,24 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    string Randomize(){
+        string eventName = "";
+        int tmp = Random.Range(1, 10);
+        if(tmp % 2 == 1){
+            eventName = "Knock";
+        }else{
+            eventName = "Phone Ringing";
+        }   
+        return eventName;
+    }
     void StartEvent(string eventName){
         eventCount++;
 
         // Randomize the event, if not predetermined.
         if(eventName == "Random"){
-            int tmp = Random.Range(1, 10);
-            if(tmp % 2 == 1){
-                eventName = "Knock";
-            }else{
-                eventName = "Phone Ringing";
-            }   
+            do{
+                eventName = Randomize();            
+            }while(lastEventType == "Phone Ringing" && eventName == "Phone Ringing");
         }
 
         // Randomize the people associated with the event.
@@ -78,6 +87,7 @@ public class EventManager : MonoBehaviour
 
     public void StopEvent(){
         lastEventTime = mLinker.mTimeManager.GetCurrTime();
+        lastEventType = CurrEvent.GetEventType();
 
         // calculate the next event time.
         timeBetweenNextEvent = Random.Range(minTimeBetweenEvent, maxTimeBetweenEvent);
