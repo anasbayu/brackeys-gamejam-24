@@ -43,7 +43,6 @@ public class EventManager : MonoBehaviour
             }
         }
 
-        // TODO: It should not be here. It should be in the People Class.
         // If there is a People event currently running, check their status.
         if(isEventRunning && CurrEvent != null){
             // If he get angry.

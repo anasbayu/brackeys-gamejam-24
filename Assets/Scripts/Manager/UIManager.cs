@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour{
@@ -12,6 +13,9 @@ public class UIManager : MonoBehaviour{
     public bool isDialogueShowing, isQuestShowing;
     public GameObject mOverlay;
     bool isPaused;
+
+    public Sprite mDoor, mPeek, mTalk, mShutter, mHand;
+    public SpriteRenderer mActionIcon;
 
     void Start(){
         isDialogueShowing = false;
@@ -50,5 +54,20 @@ public class UIManager : MonoBehaviour{
         isPaused = !isPaused;
 
         mOverlay.SetActive(isPaused);
+    }
+
+    public void ShowActionBalloon(string actionName){
+        if(actionName == "Talk"){
+            mActionIcon.sprite = mTalk;
+        }else if(actionName == "Open Door"){
+            mActionIcon.sprite = mDoor;
+        }else if(actionName == "Peek"){
+            mActionIcon.sprite = mPeek;
+        }else if(actionName == "Shutter"){
+            mActionIcon.sprite = mShutter;
+        }else{
+            mActionIcon.sprite = mHand;
+            // Default action, hand icon. Interact.
+        }
     }
 }

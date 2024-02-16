@@ -68,6 +68,10 @@ public class PlayerControll : MonoBehaviour{
             if(Input.GetKeyDown(KeyCode.F) && mLinker.mPlayerSense.isInteracting){
                 mLinker.mPlayerSense.Interact();
             }
+
+            if(Input.GetKeyDown(KeyCode.Q) && mLinker.mPlayerSense.isInteracting && mLinker.mPlayerSense.isMultiAction){
+                mLinker.mPlayerSense.CycleAction();
+            }
         }
 
         // Close the dialogue box.

@@ -5,18 +5,37 @@ using UnityEngine;
 public class PlayerSense : MonoBehaviour{
     public Linker mLinker;
     public bool isInteracting;
+    public bool isMultiAction;
+    public List<string> actionList = new List<string>();
+    public int currActionIndex;
     GameObject interactedObj;
 
     void Start(){
         isInteracting = false;
+        isMultiAction = false;
+        currActionIndex = 0;
         mLinker.mStatusBalloon.SetActive(false);
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == "Interactable"){
-            mLinker.mStatusBalloon.SetActive(true);
             isInteracting = true;
+            currActionIndex = 0;
             interactedObj = other.gameObject;
+
+
+            actionList = interactedObj.GetComponent<TriggerInfo>().GetActionList();
+            if(actionList.Count > 0){
+                // If there are multiple action on the object.
+                isMultiAction = true;
+            }
+
+            mLinker.mStatusBalloon.SetActive(true);
+            if(actionList.Count > 0){
+                mLinker.mUIManager.ShowActionBalloon(actionList[currActionIndex]);
+            }else{
+                mLinker.mUIManager.ShowActionBalloon("Hand");
+            }
         }
     }
 
@@ -24,7 +43,9 @@ public class PlayerSense : MonoBehaviour{
         if(other.gameObject.tag == "Interactable"){
             mLinker.mStatusBalloon.SetActive(false);
             isInteracting = false;
+            isMultiAction = false;
             interactedObj = null;
+            actionList = null;
         }
 
         if(other.gameObject.tag == "Cam Switch"){
@@ -42,6 +63,17 @@ public class PlayerSense : MonoBehaviour{
                 }
             }
         }
+    }
+
+    public void CycleAction(){
+        if(currActionIndex < actionList.Count-1){
+            currActionIndex++;
+        }else{
+            currActionIndex = 0;
+        }
+
+        // Show the action UI.
+        mLinker.mUIManager.ShowActionBalloon(actionList[currActionIndex]);
     }
 
     public void Interact(){
