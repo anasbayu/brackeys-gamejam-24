@@ -22,27 +22,38 @@ public class People : MonoBehaviour{
     public List<string> infoCallMessage = new List<string>();
     public List<string> orderCallMessage = new List<string>();
 
+    string msgOpening, msgAngry, msgEnding, msgGeneralCall, msgInfoCall, msgOrderCall;
+
+    public void SetPeople(){
+        msgOpening = openingDialogues[Random.Range(0, openingDialogues.Count)];
+        msgAngry = waitingDialogues[Random.Range(0, waitingDialogues.Count)];
+        msgEnding = endingDialogues[Random.Range(0, endingDialogues.Count)];
+        msgGeneralCall = generalCallMessage[Random.Range(0, generalCallMessage.Count)];
+        msgInfoCall = infoCallMessage[Random.Range(0, infoCallMessage.Count)];
+        msgOrderCall = orderCallMessage[Random.Range(0, orderCallMessage.Count)];
+    }
+
     public string Knocking(){
-        return openingDialogues[Random.Range(0, openingDialogues.Count)];
+        return msgOpening;
     }
 
     public string Angry(){
-        return waitingDialogues[Random.Range(0, waitingDialogues.Count)];
+        return msgAngry;
     }
 
     public string Left(){
-        return endingDialogues[Random.Range(0, endingDialogues.Count)];
+        return msgEnding;
     }
 
     public string GeneralCall(){
-        return generalCallMessage[Random.Range(0, generalCallMessage.Count)];
+        return msgGeneralCall;
     }
 
     public string InfoCall(){
-        return infoCallMessage[Random.Range(0, infoCallMessage.Count)];
+        return msgInfoCall;
     }
 
     public string OrderCall(){
-        return orderCallMessage[Random.Range(0, orderCallMessage.Count)];
+        return msgOrderCall;
     }
 }
