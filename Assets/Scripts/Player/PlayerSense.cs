@@ -82,7 +82,16 @@ public class PlayerSense : MonoBehaviour{
         if(triggerName == "Photo"){
             mLinker.mUIManager.ShowDialogue(true, "this is my family photo.");
         }else if(triggerName == "Door"){
-            mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.Open());
+            if(actionList[currActionIndex] == "Open Door"){
+                // Check if there is an event going on.
+                // Animate open door.
+            }else if(actionList[currActionIndex] == "Talk"){
+                // Talk.
+
+            }else{
+                // show what the Player think. (Hand)
+                mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.Open());
+            }
         }else if(triggerName == "Fridge"){
             mLinker.mUIManager.ShowDialogue(true, "checking the fridge...");
             List<string> itemsInsideFridge = mLinker.mFridge.CheckWhatsIndside();
@@ -101,7 +110,12 @@ public class PlayerSense : MonoBehaviour{
             mLinker.mUIManager.ShowDialogue(true, tmpItemsString);
         }else if(triggerName == "Window"){
             //call window.
-            mLinker.mUIManager.ShowDialogue(true, mLinker.mWindow.Peek());
+            if(actionList[currActionIndex] == "Shutter"){
+                mLinker.mWindow.ToggleShutter();
+            }else{
+                // Peek
+                mLinker.mUIManager.ShowDialogue(true, mLinker.mWindow.Peek());
+            }
         }else if(triggerName == "Record Player"){
             mLinker.mSoundManager.TogglePlayBGM();
         }else if(triggerName == "Lamp"){
