@@ -131,6 +131,10 @@ public class TimeManager : MonoBehaviour{
         return timeOfDay;   
     }
 
+    public int GetCurrHour(){
+        return currHour;
+    }
+
     public void ShowCurrentTime(){
         // convert hours & minutes to the correct format.
         string tmpMinutesToDisplay;

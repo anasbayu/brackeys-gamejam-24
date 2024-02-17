@@ -91,6 +91,7 @@ public class EventManager : MonoBehaviour
 
         // calculate the next event time.
         timeBetweenNextEvent = Random.Range(minTimeBetweenEvent, maxTimeBetweenEvent);
+        CurrEvent.FinishTheEvent();
         CurrEvent = null;
     }
 

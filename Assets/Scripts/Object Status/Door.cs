@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Door : MonoBehaviour{
     public Linker mLinker;
-    public Sprite mOpenedDoorSprite, mClosedDoorSprite;
+    public GameObject mOpenedDoorSprite, mClosedDoorSprite;
     public bool isDoorOpen;
     public List<string> responseTextGeneral = new List<string>();
+    public Sprite mOpenedDoorMidday, mOpenedDoorEvening, mOpenedDoorNight, mOpenedDoorMorning;
     
     void Start(){
         isDoorOpen = false;
@@ -29,17 +30,29 @@ public class Door : MonoBehaviour{
     }
 
     public void Open(){
+        // When opened, check the current time and assign the suitable sprite.
+        if(mLinker.mTimeManager.GetCurrHour() < 12){
+            mOpenedDoorSprite.GetComponent<SpriteRenderer>().sprite = mOpenedDoorMorning;
+        }else if(mLinker.mTimeManager.GetCurrHour() < 17){
+            mOpenedDoorSprite.GetComponent<SpriteRenderer>().sprite = mOpenedDoorMidday;
+        }else if(mLinker.mTimeManager.GetCurrHour() < 19){
+            mOpenedDoorSprite.GetComponent<SpriteRenderer>().sprite = mOpenedDoorEvening;
+        }else if(mLinker.mTimeManager.GetCurrHour() < 24){
+            mOpenedDoorSprite.GetComponent<SpriteRenderer>().sprite = mOpenedDoorNight;
+        }
+
         // TODO: Animate the Player to walk over the door area.
 
-        GetComponent<SpriteRenderer>().sprite = mOpenedDoorSprite;
+        mOpenedDoorSprite.SetActive(true);
+        mClosedDoorSprite.SetActive(false);
         isDoorOpen = true;
     }
 
     public void Close(){
         isDoorOpen = false;
-        GetComponent<SpriteRenderer>().sprite = mClosedDoorSprite;
+        mClosedDoorSprite.SetActive(true);
+        mOpenedDoorSprite.SetActive(false);
     }
-
     public void Knock(){
         mLinker.mSoundManager.PlayKnock();
     }

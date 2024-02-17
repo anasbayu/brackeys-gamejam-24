@@ -16,6 +16,7 @@ public class Event{
         mPeople = thePeople;
         mLinker = linker;
 
+        mPeople.gameObject.SetActive(true);
         PlaySFX();
         PlayEvent();
     }
@@ -68,6 +69,7 @@ public class Event{
 
     public void FinishTheEvent(){
         isRunning = false;
+        mPeople.gameObject.SetActive(false);
     }
 
     public string GetEventType(){
