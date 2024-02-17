@@ -87,7 +87,7 @@ public class PlayerSense : MonoBehaviour{
                 mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.OpenDialogue(mLinker.mEventManager.IsThereAnEvent()));
             }else if(actionList[currActionIndex] == "Talk"){
                 // Check if there is event running.
-                if(mLinker.mEventManager.IsThereAnEvent()){
+                if(mLinker.mEventManager.IsThereAnEvent() && mLinker.mEventManager.GetCurrEvent().GetEventType() == "Knock"){
                     // Talk to the person behind the door.
                     mLinker.mUIManager.ShowDialogue(true, "Who's there?.");
                     mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople().StartConversation();

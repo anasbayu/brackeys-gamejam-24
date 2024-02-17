@@ -46,7 +46,7 @@ public class People : MonoBehaviour{
                 isHavingVehicle = true;
                 msgWindowPeek = "There is a big truck in the front yard.";
             }else{
-                msgWindowPeek = "Just my neighborhood";
+                msgWindowPeek = "Nothing to see, Just my normal neighborhood.";
                 isHavingVehicle = false;
             }
         }else if(type == "Neighbor"){
@@ -55,7 +55,7 @@ public class People : MonoBehaviour{
             customPeekMsg.Add("I see a curly hair standing in front of the house. I think it is the Morleys.");
             customPeekMsg.Add("Nothing to see, Just my normal neighborhood.");
             customPeekMsg.Add("What did he bring? It looks yummy!");
-            
+
             int tmpIndex = Random.Range(0, customPeekMsg.Count);
             msgWindowPeek = customPeekMsg[tmpIndex];
         }
