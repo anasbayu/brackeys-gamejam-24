@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Quest{
     string questText;
+    string questType;
+
     bool isComplete;
 
-    public Quest(string newQuest){
+    public Quest(string newQuest, string type){
         isComplete = false;
         questText = newQuest;
+        questType = type;
     }
 
     public void SetQuestText(string text){
@@ -17,5 +20,13 @@ public class Quest{
 
     public string GetQuestText(){
         return questText;
+    }
+
+    public bool CheckQuestType(string typeToCheck){
+        if(typeToCheck == questType){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

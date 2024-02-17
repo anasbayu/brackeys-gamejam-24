@@ -8,8 +8,7 @@ public class People : MonoBehaviour{
                             "Parents", 
                             "Delivery Guy", 
                             "Neighbour", 
-                            "Scout Boys", 
-                            "Friend"};
+                            "Plumber"};
     
     [Dropdown("peopleTypes")]
     public string type;
@@ -50,6 +49,15 @@ public class People : MonoBehaviour{
                 msgWindowPeek = "Just my neighborhood";
                 isHavingVehicle = false;
             }
+        }else if(type == "Neighbor"){
+            // Randomize the peeking msg for the neighbor.
+            List<string> customPeekMsg = new List<string>();
+            customPeekMsg.Add("I see a curly hair standing in front of the house. I think it is the Morleys.");
+            customPeekMsg.Add("Nothing to see, Just my normal neighborhood.");
+            customPeekMsg.Add("What did he bring? It looks yummy!");
+            
+            int tmpIndex = Random.Range(0, customPeekMsg.Count);
+            msgWindowPeek = customPeekMsg[tmpIndex];
         }
     }
 

@@ -99,10 +99,9 @@ public class PlayerSense : MonoBehaviour{
                 mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.InnerThought());
             }
         }else if(triggerName == "Fridge"){
-            mLinker.mUIManager.ShowDialogue(true, "checking the fridge...");
             List<string> itemsInsideFridge = mLinker.mFridge.CheckWhatsIndside();
 
-            string tmpItemsString = "";
+            string tmpItemsString = "Let's see what we have...<br>";
             for(int i = 0; i < itemsInsideFridge.Count; i++){
                 tmpItemsString += itemsInsideFridge[i];
 

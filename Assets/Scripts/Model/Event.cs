@@ -52,8 +52,6 @@ public class Event{
                 callMsg = mPeople.OrderCall();   // Make sure to fill in the inspector, the same value as the parents.
             }else if(mPeople.type == "Neighbour"){
                 callMsg = "This is your neighbour, I have been seeing strange man wandering around your house.";
-            }else if(mPeople.type == "Friend"){
-                callMsg = "Hey! This is Tim, let's play at my house. I've got a new video games!";
             }else{
                 // just hung up.
                 callMsg = "...";

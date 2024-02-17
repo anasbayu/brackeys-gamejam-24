@@ -8,9 +8,9 @@ public class Notes : MonoBehaviour{
 
     void Start(){
         // Default quest.
-        AddNote(new Quest("Get the package from grandpa. It should arrive this afternoon."));
-        AddNote(new Quest("The Morleys, our new neighbour called this morning. They wanted to visit our house."));
-        AddNote(new Quest("Don't go to Tim house before I come home! I'll arrive around 5 PM."));
+        AddNote(new Quest("Get the package from grandpa. It should arrive this afternoon.", "Delivery Guy"));
+        AddNote(new Quest("The Morleys, our neighbor called this morning. They wanted us to taste their Mochi.", "Neighbor"));
+        AddNote(new Quest("A Plumber will vome over this morning", "Plumber"));
     }
 
     public void AddNote(Quest newNote){

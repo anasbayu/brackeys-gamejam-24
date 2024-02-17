@@ -10,6 +10,8 @@ public class TimeManager : MonoBehaviour{
     // public Light2D[] lampuRumah;
     public UnityEngine.Rendering.Universal.Light2D mWindowLight;    
     public UnityEngine.Rendering.Universal.Light2D mGlobalLight;   
+    public UnityEngine.Rendering.Universal.Light2D mKitchenLight;   
+
     
     public string hexMorning, hexMidday, hexEvening, hexNight;
 
@@ -60,6 +62,8 @@ public class TimeManager : MonoBehaviour{
         if(currHour < 12){
             mGlobalLight.intensity = 0.5f;
             colorHex = hexMorning;
+
+            mKitchenLight.intensity = 0f;
         }else if(currHour < 16){
             mGlobalLight.intensity = 0.7f;
             colorHex = hexMidday;
@@ -69,6 +73,8 @@ public class TimeManager : MonoBehaviour{
         }else{
             mGlobalLight.intensity = 0.2f;
             colorHex = hexNight;
+
+            mKitchenLight.intensity = 1f;
         }
 
         Color newCol;

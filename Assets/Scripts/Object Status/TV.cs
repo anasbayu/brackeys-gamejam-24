@@ -28,7 +28,7 @@ public class TV : MonoBehaviour{
 
             // TODO: Check if there is a news? if not, show snow.
             screenOn.SetActive(true);
-            mLinker.mUIManager.ShowDialogue(true, "...");
+            mLinker.mUIManager.ShowDialogue(true, "...<br>Nothing good to watch.");
         }else{
             VFXTVLight.SetActive(false);
             blinkIndicatorGreen.SetActive(false);

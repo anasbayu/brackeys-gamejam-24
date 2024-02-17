@@ -8,9 +8,9 @@ public class Fridge : MonoBehaviour{
 
     void Start() {
         isEmpty = true;
-        fridgeObjects.Add("Milk");
-        fridgeObjects.Add("Apple");
-        fridgeObjects.Add("Coffee");
+        fridgeObjects.Add("half bottle of Milk");
+        fridgeObjects.Add("Cereal");
+        fridgeObjects.Add("Last night coffee");
     }
 
     public List<string> CheckWhatsIndside(){
