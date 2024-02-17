@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour{
         heartLeft--;
         mLinker.mUIManager.DecreaseHeart(heartLeft);
 
+        mLinker.mTV.AddNews();
+
         if(heartLeft <= 0){
             SetGameOver();
         }

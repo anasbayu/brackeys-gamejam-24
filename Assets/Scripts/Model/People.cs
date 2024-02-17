@@ -5,6 +5,7 @@ using UnityEngine;
 public class People : MonoBehaviour{
     public Linker mLinker;
     public string name;
+    public string cloth;
     string[] peopleTypes = {"Killer", 
                             "Parents", 
                             "Delivery Guy", 

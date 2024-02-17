@@ -10,8 +10,13 @@ public class TV : MonoBehaviour{
     public AudioSource mSFXTVSource;
     public AudioClip TVOn, TVOff;
     bool isOn;
+    bool isThereNews;       // only display news once.
+    string news;
+    int newsCount;
 
     void Start(){
+        newsCount = 0;
+        isThereNews = false;
         isOn = false;
         blinkIndicatorRed.SetActive(true);
     }
@@ -28,7 +33,14 @@ public class TV : MonoBehaviour{
 
             // TODO: Check if there is a news? if not, show snow.
             screenOn.SetActive(true);
-            mLinker.mUIManager.ShowDialogue(true, "...<br>Nothing good to watch.");
+
+            if(isThereNews){
+                mLinker.mUIManager.ShowDialogue(true, news);
+                news = "";
+                isThereNews = false;
+            }else{
+                mLinker.mUIManager.ShowDialogue(true, "...<br>Nothing good to watch.");
+            }
         }else{
             VFXTVLight.SetActive(false);
             blinkIndicatorGreen.SetActive(false);
@@ -41,4 +53,28 @@ public class TV : MonoBehaviour{
         }
     }
 
+    public void AddNews(){
+        newsCount++;
+        People peopleKilled = mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople();
+        int timeKilled = mLinker.mTimeManager.GetCurrHour();
+        
+        string timeKilledConverted;
+        if(timeKilled < 13){
+            timeKilledConverted = timeKilled.ToString() + " AM";
+        }else{
+            timeKilled = timeKilled%12;
+            timeKilledConverted = timeKilled.ToString() + " PM";
+        }
+
+        news = "<b>Breaking News.</b><br>";
+        news += "A body wearing " + peopleKilled.cloth + " has been found around " + timeKilledConverted + "<br>";
+        
+        if(newsCount <= 1){
+            news += "Be careful and always lock your door.";
+        }else{
+            news += "This is rather concerning because the body was found in the same area near a house.";
+        }
+
+        isThereNews = true;
+    }
 }
