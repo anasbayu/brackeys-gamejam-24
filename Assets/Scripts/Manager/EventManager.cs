@@ -53,6 +53,9 @@ public class EventManager : MonoBehaviour
 
                 if(mLinker.mTimeManager.GetCurrTime() == lastEventTime + CurrEvent.GetAssociatedPeople().timeWillingToWait){
                     mLinker.mUIManager.ShowDialogue(true, CurrEvent.GetAssociatedPeople().Left());
+                    if(CurrEvent.GetAssociatedPeople().type != "Killer"){
+                        mLinker.mGameManager.DecreaseHeart();
+                    }
                     StopEvent();
                 }
             } 

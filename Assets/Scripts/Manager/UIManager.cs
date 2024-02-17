@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour{
     public Sprite mDoor, mPeek, mTalk, mShutter, mHand;
     public SpriteRenderer mActionIcon;
     public GameObject mGameOverSection;
+    public GameObject heart1, heart2, heart3;
 
     void Start(){
         isDialogueShowing = false;
@@ -74,6 +75,16 @@ public class UIManager : MonoBehaviour{
         }else{
             mActionIcon.sprite = mHand;
             // Default action, hand icon. Interact.
+        }
+    }
+
+    public void DecreaseHeart(int heartLeft){
+        if(heartLeft == 2){
+            heart3.SetActive(false);
+        }else if(heartLeft == 1){
+            heart2.SetActive(false);
+        }else{
+            heart1.SetActive(false);
         }
     }
 }
