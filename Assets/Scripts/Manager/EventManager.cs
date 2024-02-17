@@ -8,11 +8,11 @@ public class EventManager : MonoBehaviour
     public List<People> mPeoples = new List<People>();
     
     // Change this to set how long to give the Player idle time before the first event.
-    int timeBeforeFirstEvent = 30;
+    int timeBeforeFirstEvent = 5;
 
     // Define the interval between time. It's going to be random(min, max).
-    int minTimeBetweenEvent = 20;
-    int maxTimeBetweenEvent = 30;
+    int minTimeBetweenEvent = 10;
+    int maxTimeBetweenEvent = 15;
     public int timeBetweenNextEvent;
 
     public int lastEventTime;  // Save the time of the last event occured,
@@ -80,6 +80,8 @@ public class EventManager : MonoBehaviour
         }
 
         // Randomize the people associated with the event.
+        // TODO: just for testing.
+        // int tmpIndex = 0;   
         int tmpIndex = Random.Range(0, mPeoples.Count);
         mPeoples[tmpIndex].SetPeople();
         CurrEvent = new Event(eventName, mPeoples[tmpIndex], mLinker);

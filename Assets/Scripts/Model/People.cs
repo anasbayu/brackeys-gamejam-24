@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class People : MonoBehaviour{
+    public Linker mLinker;
     public string name;
     string[] peopleTypes = {"Killer", 
                             "Parents", 

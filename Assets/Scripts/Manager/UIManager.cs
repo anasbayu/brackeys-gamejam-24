@@ -16,12 +16,14 @@ public class UIManager : MonoBehaviour{
 
     public Sprite mDoor, mPeek, mTalk, mShutter, mHand;
     public SpriteRenderer mActionIcon;
+    public GameObject mGameOverSection;
 
     void Start(){
         isDialogueShowing = false;
         isQuestShowing = false;
         mTextBox.SetActive(false);
         isPaused = false;
+        mGameOverSection.SetActive(false);
     }
 
     public void ShowDialogue(bool isShowing, string text){
@@ -48,6 +50,10 @@ public class UIManager : MonoBehaviour{
         }else{
             mLinker.mTimeManager.ContinueGame();
         }
+    }
+
+    public void ShowGameOver(){
+        mGameOverSection.SetActive(true);
     }
 
     public void ToggleShowPauseMenu(){

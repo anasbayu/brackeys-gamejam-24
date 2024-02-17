@@ -17,7 +17,7 @@ public class PlayerControll : MonoBehaviour{
 
     void Update(){
         if(!mLinker.mUIManager.isDialogueShowing && !mLinker.mUIManager.isQuestShowing 
-            && !mLinker.mGameManager.isPaused){
+            && !mLinker.mGameManager.isPaused && !mLinker.mGameManager.isGameOver){
             // Move right.
             if(Input.GetKey(KeyCode.D)){
                 isMoving = true;
@@ -81,7 +81,14 @@ public class PlayerControll : MonoBehaviour{
                     if(mLinker.mEventManager.GetCurrEvent().
                         GetAssociatedPeople().isLetInside){
                         
-                        // do something.
+                        // If the current People is a killer. Game Over.
+                        if(mLinker.mEventManager.GetCurrEvent().
+                            GetAssociatedPeople().type == "Killer"){
+                            mLinker.mGameManager.SetGameOver();
+
+                            // Play death scene.
+                        }
+
                         mLinker.mDoor.Close();
                         mLinker.mEventManager.StopEvent();
                     }else{
@@ -103,7 +110,7 @@ public class PlayerControll : MonoBehaviour{
         }
 
         // Pause game.
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(Input.GetKeyDown(KeyCode.Escape) && !mLinker.mGameManager.isGameOver){
             mLinker.mGameManager.TooglePauseGame();
         }
     }
