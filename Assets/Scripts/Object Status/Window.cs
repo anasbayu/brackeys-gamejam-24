@@ -8,7 +8,7 @@ public class Window : MonoBehaviour
     public bool isShutterOpen;
     public GameObject mShutter;
     public GameObject mWindowLight;
-    public List<string> peekResponseTextGeneral = new List<string>();
+    public List<string> peekResponseTextGeneral = new List<string>(); 
 
     void Start(){
         isShutterOpen = true;

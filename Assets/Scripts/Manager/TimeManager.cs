@@ -6,21 +6,21 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour{
     public Linker mLinker;
     public static bool isDaytime;
-    public UnityEngine.Rendering.Universal.Light2D globalLight;
+   
     // public Light2D[] lampuRumah;
+    public UnityEngine.Rendering.Universal.Light2D mWindowLight;    
+    public UnityEngine.Rendering.Universal.Light2D mGlobalLight;   
+    
+    public string hexMorning, hexMidday, hexEvening, hexNight;
 
-    public float lightDecrement, lightIncrement;
-
-    float timeLeft;
     [SerializeField] int timeOfDay = 0;
     [SerializeField] int currHour;
     [SerializeField] int currMin;
 
 
     void Start(){
-        // Set global light color.
-        // globalLight.color = mDictColor.GetLightColor(1);
         StartTheDay();
+        ChangeLightColor();
     }
 
     public void isGameOver(){
@@ -44,25 +44,36 @@ public class TimeManager : MonoBehaviour{
     }
 
     void CycleStart(){
-        // Play SFX rooster.
-        if(timeOfDay == 3){
-            // mLinker.mSoundManager.PlayEnvSound("rooster");
-        }
-
-        // Pengaturan lightning global.
-        // if(timeOfDay >= 50 && timeOfDay < 83){
-        //     globalLight.intensity -= lightDecrement;
-        // }else if(timeOfDay >= 83){
-        //     globalLight.intensity += lightIncrement;
-        // }else{
-        //     globalLight.intensity = 1;
-        // }
-
         timeOfDay++;
         currMin = timeOfDay%60;
         if(currMin == 0){
             currHour++;
+
+            ChangeLightColor();
         }
+    }
+
+    void ChangeLightColor(){
+        string colorHex = "";
+
+        // Pengaturan lightning global.
+        if(currHour < 12){
+            mGlobalLight.intensity = 0.5f;
+            colorHex = hexMorning;
+        }else if(currHour < 16){
+            mGlobalLight.intensity = 0.7f;
+            colorHex = hexMidday;
+        }else if(currHour < 19){
+            mGlobalLight.intensity = 0.5f;
+            colorHex = hexEvening;
+        }else{
+            mGlobalLight.intensity = 0.2f;
+            colorHex = hexNight;
+        }
+
+        Color newCol;
+        ColorUtility.TryParseHtmlString(colorHex, out newCol);
+        mWindowLight.color = newCol;
     }
 
     void Update(){
@@ -82,38 +93,6 @@ public class TimeManager : MonoBehaviour{
         }else if(timeOfDay <= 90){
             tmpIndex = 1;
         }
-
-        // List<Color> newColor = mDictColor.GetSkyColor(tmpIndex);
-
-
-        // if (timeLeft <= Time.deltaTime){
-        //     timeLeft = 11f;
-        // }
-        // else{
-        //     Color tmpColor1 = Color.Lerp(mShader.GetColor("_Color1"), newColor[0], Time.deltaTime / timeLeft);
-        //     Color tmpColor2 = Color.Lerp(mShader.GetColor("_Color2"), newColor[1], Time.deltaTime / timeLeft);
-
-        //     // Set sky color.
-        //     mShader.SetColor("_Color1", tmpColor1);
-        //     mShader.SetColor("_Color2", tmpColor2);
-        
-        //     try{
-        //         // Set cloud color.
-        //         Color cloudColor = Color.Lerp(cloud.color, mDictColor.GetCloudColor(tmpIndex-1), Time.deltaTime / timeLeft);
-        //         cloud.color = cloudColor;
-        //         // cloud.color = mDictColor.GetCloudColor(tmpIndex-1);
-        //     }
-        //     catch (System.Exception){
-        //         Debug.Log("WARN: No color set.");
-        //     }
-
-        //     // Set global light color.
-        //     Color lightColor = Color.Lerp(globalLight.color, mDictColor.GetLightColor(tmpIndex-1), Time.deltaTime / timeLeft);
-        //     globalLight.color = lightColor; 
-        //     // globalLight.color = mDictColor.GetLightColor(tmpIndex-1); 
-            
-        //     timeLeft -= Time.deltaTime;
-        // }
     }
 
     
