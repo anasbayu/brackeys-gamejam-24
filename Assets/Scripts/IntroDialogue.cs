@@ -29,13 +29,13 @@ public class IntroDialogue : MonoBehaviour
     void Update(){
         if(isIntroStarting){
             if(Input.GetKeyDown(KeyCode.Space)){
-                currIntroIndex++;
 
                 if(currIntroIndex >= dialogues.Count){
                     mUI.Load("Gameplay");
                 }else{
                     mTxtIntro.text = dialogues[currIntroIndex];
                 }
+                currIntroIndex++;
             }
         }
     }
