@@ -68,7 +68,13 @@ public class PlayerControll : MonoBehaviour{
         // Close the dialogue box.
         if(Input.GetKeyDown(KeyCode.Space) && mLinker.mUIManager.isDialogueShowing){
             if(mLinker.mPhone.IsThereOnGoingCall()){
-                mLinker.mPhone.PhoneConversation();
+                // if from phone
+                Debug.Log(mLinker.mPlayerSense.interactedObj.name);
+                if(mLinker.mPlayerSense.interactedObj.name == "Telephone"){
+                    mLinker.mPhone.PhoneConversation();
+                }else{
+                    mLinker.mUIManager.ShowDialogue(false, "");
+                }
             }else{
                 mLinker.mUIManager.ShowDialogue(false, "");
 
@@ -84,17 +90,28 @@ public class PlayerControll : MonoBehaviour{
                         // If the current People is a killer. Game Over.
                         if(mLinker.mEventManager.GetCurrEvent().
                             GetAssociatedPeople().type == "Killer"){
-                            mLinker.mGameManager.SetGameOver();
+
+
+                            // Play gameover SFX.
+
 
                             // Play death scene.
+                            mLinker.mGameManager.SetGameOver();
+                        }else if(mLinker.mEventManager.GetCurrEvent().
+                            GetAssociatedPeople().type == "Plumber"){
+                            // If the person is a Plumber.
+                            mLinker.mEventManager.PlumberToWork();
                         }
 
                         mLinker.mDoor.Close();
                         mLinker.mEventManager.StopEvent();
                     }else{
-                        string textToDisplay = mLinker.mEventManager.GetCurrEvent().
-                        GetAssociatedPeople().LettingInsideHouse();
+                        People tmpPeople = mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople();
+                        string textToDisplay = tmpPeople.LettingInsideHouse();
                         mLinker.mUIManager.ShowDialogue(true, textToDisplay);
+
+                        // Set the Quest.
+                        mLinker.mNote.CompleteAQuest(tmpPeople.type);
                     }                
                 }else if(mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople().isHavingConversation){
                     string textToDisplay = mLinker.mEventManager.GetCurrEvent().

@@ -26,6 +26,9 @@ public class TriggerInfo : MonoBehaviour{
             actionList.Add("Open Door");
             actionList.Add("Talk");
             actionList.Add("Hand");
+        }else if(triggerName == "Phone"){
+            actionList.Add("Hand");
+            actionList.Add("Talk");
         }
     }
 

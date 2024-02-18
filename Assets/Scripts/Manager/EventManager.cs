@@ -8,23 +8,30 @@ public class EventManager : MonoBehaviour
     public List<People> mPeoples = new List<People>();
     
     // Change this to set how long to give the Player idle time before the first event.
-    int timeBeforeFirstEvent = 5;
+    int timeBeforeFirstEvent = 45;
 
     // Define the interval between time. It's going to be random(min, max).
-    int minTimeBetweenEvent = 10;
-    int maxTimeBetweenEvent = 15;
+    int minTimeBetweenEvent = 45;
+    int maxTimeBetweenEvent = 60;
     public int timeBetweenNextEvent;
 
     public int lastEventTime;  // Save the time of the last event occured,
     string lastEventType;
     int eventCount;     // Save the total event count.
     Event CurrEvent;
+    public GameObject mPlumberAction;
 
     void Start(){
+        mPlumberAction.SetActive(false);
         lastEventType = null;
         eventCount = 0;
         lastEventTime = mLinker.mTimeManager.GetCurrTime();
         timeBetweenNextEvent = Random.Range(minTimeBetweenEvent, maxTimeBetweenEvent);
+    }
+
+    public void PlumberToWork(){
+        mPlumberAction.SetActive(true);
+        mPlumberAction.GetComponent<Plumber>().StartWork();
     }
 
     void Update(){
@@ -80,12 +87,25 @@ public class EventManager : MonoBehaviour
             do{
                 eventName = Randomize();            
             }while(lastEventType == "Phone Ringing" && eventName == "Phone Ringing");
-        }
+        }        
+
 
         // Randomize the people associated with the event.
-        // TODO: just for testing.
-        // int tmpIndex = 0;   
-        int tmpIndex = Random.Range(0, mPeoples.Count);
+        //event rules here.
+        // 0 = killer plumber, 1 = neighbor, 2 = delivery, 3 = plumber, 4 = killer neighbor, 5 = killer delivery
+        int tmpIndex = 0;
+        do{
+            if(mLinker.mTimeManager.GetCurrHour() < 12){
+                // morning 0,1,3,4,5
+                do{
+                    tmpIndex = Random.Range(0, mPeoples.Count);
+                }while(tmpIndex == 2);
+            }else{
+                tmpIndex = Random.Range(0, mPeoples.Count);
+            }
+        // Check if there is a completed quest with this people?
+        }while(mLinker.mNote.CheckIsQuestCompleted(mPeoples[tmpIndex].type));
+
         mPeoples[tmpIndex].SetPeople();
         CurrEvent = new Event(eventName, mPeoples[tmpIndex], mLinker);
     }

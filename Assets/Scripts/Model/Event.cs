@@ -38,16 +38,17 @@ public class Event{
             string callMsg = "";
 
             if(mPeople.type == "Parents"){
+                callMsg = mPeople.GeneralCall();
                 // Randomize what the parents call for.
                 // 1,2 = just checkin. 3 = give an order. 4 = give information.
-                int indexParentsCall = Random.Range(1, 4);
-                if(indexParentsCall == 1 || indexParentsCall == 2){
-                    callMsg = mPeople.GeneralCall();
-                }else if(indexParentsCall == 3){
-                    callMsg = mPeople.OrderCall();
-                }else{
-                    callMsg = mPeople.InfoCall();
-                }
+                // int indexParentsCall = Random.Range(1, 4);
+                // if(indexParentsCall == 1 || indexParentsCall == 2){
+                //     callMsg = mPeople.GeneralCall();
+                // }else if(indexParentsCall == 3){
+                //     callMsg = mPeople.OrderCall();
+                // }else{
+                //     callMsg = mPeople.InfoCall();
+                // }
             }else if(mPeople.type == "Killer"){
                 callMsg = mPeople.OrderCall();   // Make sure to fill in the inspector, the same value as the parents.
             }else if(mPeople.type == "Neighbour"){

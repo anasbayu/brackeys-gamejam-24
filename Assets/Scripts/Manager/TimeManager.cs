@@ -38,7 +38,7 @@ public class TimeManager : MonoBehaviour{
     }
 
     public void ContinueGame(){
-        InvokeRepeating("CycleStart", 0, 1f);
+        InvokeRepeating("CycleStart", 0, 0.5f);
     }
 
     public void PauseTimeCount(){

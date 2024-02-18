@@ -6,7 +6,7 @@ public class Quest{
     string questText;
     string questType;
 
-    bool isComplete;
+    public bool isComplete;
 
     public Quest(string newQuest, string type){
         isComplete = false;
@@ -28,5 +28,10 @@ public class Quest{
         }else{
             return false;
         }
+    }
+
+    public void CompleteQuest(){
+        isComplete = true;
+        questText = "<s>" + questText + "</s>";
     }
 }

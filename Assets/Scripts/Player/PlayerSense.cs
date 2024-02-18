@@ -8,7 +8,7 @@ public class PlayerSense : MonoBehaviour{
     public bool isMultiAction;
     public List<string> actionList = new List<string>();
     public int currActionIndex;
-    GameObject interactedObj;
+    public GameObject interactedObj;
 
     void Start(){
         isInteracting = false;
@@ -83,11 +83,16 @@ public class PlayerSense : MonoBehaviour{
             mLinker.mUIManager.ShowDialogue(true, "this is my family photo.");
         }else if(triggerName == "Door"){
             if(actionList[currActionIndex] == "Open Door"){
-                // Check if there is an event going on.
-                mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.OpenDialogue(mLinker.mEventManager.IsThereAnEvent()));
+                // Check if there is an phone event going on.
+                if(mLinker.mPhone.IsThereOnGoingCall()){
+                    mLinker.mUIManager.ShowDialogue(true, "I have to answer the phone.");
+                }else{
+                    mLinker.mUIManager.ShowDialogue(true, mLinker.mDoor.OpenDialogue(mLinker.mEventManager.IsThereAnEvent()));
+                }
             }else if(actionList[currActionIndex] == "Talk"){
-                // Check if there is event running.
-                if(mLinker.mEventManager.IsThereAnEvent() && mLinker.mEventManager.GetCurrEvent().GetEventType() == "Knock"){
+                // Check if there is event running (knock).
+                if(mLinker.mEventManager.IsThereAnEvent() 
+                    && mLinker.mEventManager.GetCurrEvent().GetEventType() == "Knock"){
                     // Talk to the person behind the door.
                     mLinker.mUIManager.ShowDialogue(true, "Who's there?.");
                     mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople().StartConversation();
@@ -119,16 +124,42 @@ public class PlayerSense : MonoBehaviour{
                 mLinker.mWindow.ToggleShutter();
             }else{
                 // Peek
-                mLinker.mUIManager.ShowDialogue(true, mLinker.mWindow.Peek());
+                if(mLinker.mPhone.isRinging){
+                    mLinker.mUIManager.ShowDialogue(true, "The phone is ringing, I'd better answer it.");
+                }else{
+                    mLinker.mUIManager.ShowDialogue(true, mLinker.mWindow.Peek());
+                }
             }
         }else if(triggerName == "Record Player"){
             mLinker.mSoundManager.TogglePlayBGM();
         }else if(triggerName == "Lamp"){
             interactedObj.GetComponent<Lamp>().ToogleOnOff();
             interactedObj.GetComponent<AudioSource>().Play();
-        }else if(triggerName == "Phone" && mLinker.mPhone.isRinging){
-            mLinker.mPhone.StopRingtone();
-            mLinker.mUIManager.ShowDialogue(true, "Who is this?");
+        }else if(triggerName == "Phone"){
+            if(actionList[currActionIndex] == "Hand"){
+                if(mLinker.mPhone.isRinging){
+                    mLinker.mPhone.StopRingtone();
+                    mLinker.mUIManager.ShowDialogue(true, "Who is this?");
+                }else{
+                    mLinker.mUIManager.ShowDialogue(true, "no one called.");
+                }
+            }else if(actionList[currActionIndex] == "Talk"){
+                if(mLinker.mEventManager.IsThereAnEvent()){
+                    string msg = "";
+                    if(mLinker.mEventManager.GetCurrEvent().GetEventType() == "Knock"){
+                        // if knocking event.
+                        msg = "Hello Mom? There is someone at the door.<br>";
+                        mLinker.mPhone.CallMom();
+                    }else{
+                        // if phone event, cant talk to mom.
+                        msg = "Can't call mom, the phone is currently ringing.<br>";
+                    }
+                    // msg += "He said he is " + mLinker.mEventManager.GetCurrEvent().GetAssociatedPeople().name;
+                    mLinker.mUIManager.ShowDialogue(true, msg);
+                }else{
+                    mLinker.mUIManager.ShowDialogue(true, "I should call Mom only if there is something urgent.");
+                }
+            }
     
             // mLinker.mEventManager.StopEvent();      // TODO: Possible bug here. Should be after the dialogue box closing.
         }else if(triggerName == "Clock"){
