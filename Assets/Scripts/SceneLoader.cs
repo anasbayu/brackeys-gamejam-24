@@ -7,6 +7,7 @@ public class SceneLoader : MonoBehaviour{
     public GameObject mHintSection;
     public GameObject mMenuSectionToHide;
     bool isReadyToStart = false;
+    public IntroDialogue mIntro;
 
     void Start(){
         Time.timeScale = 1f;
@@ -14,7 +15,8 @@ public class SceneLoader : MonoBehaviour{
 
     void Update(){
         if(isReadyToStart && Input.GetKey(KeyCode.Space)){
-            Load("Gameplay");
+            // Load("Gameplay");
+            mIntro.StartIntro();
         }
     }
 

@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour{
     public Sprite mDoor, mPeek, mTalk, mShutter, mHand;
     public SpriteRenderer mActionIcon;
     public GameObject mGameOverSection;
+    public GameObject mGameCompleteSection;
     public GameObject heart1, heart2, heart3;
 
     void Start(){
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour{
         mTextBox.SetActive(false);
         isPaused = false;
         mGameOverSection.SetActive(false);
+        mGameCompleteSection.SetActive(false);
     }
 
     public void ShowDialogue(bool isShowing, string text){
@@ -54,7 +56,16 @@ public class UIManager : MonoBehaviour{
     }
 
     public void ShowGameOver(){
+        mLinker.mTimeManager.StopTime();
         mGameOverSection.SetActive(true);
+        heart1.SetActive(false);
+        heart2.SetActive(false);   
+        heart3.SetActive(false);   
+    }
+
+    public void ShowGameComplete(){
+        mLinker.mTimeManager.StopTime();
+        mGameCompleteSection.SetActive(true);
     }
 
     public void ToggleShowPauseMenu(){

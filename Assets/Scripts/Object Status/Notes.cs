@@ -43,6 +43,7 @@ public class Notes : MonoBehaviour{
 
         if(completedQuestCount == notes.Count){
             Debug.Log("Game Complete!! Win!!");
+            mLinker.mUIManager.ShowGameComplete();
         }
     }
 
